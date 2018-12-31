@@ -3,6 +3,7 @@ package NetWork.NetworkFileTransfer;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 public class ServerSide {
     public static void main(String[] args) throws IOException {
@@ -18,8 +19,9 @@ public class ServerSide {
         {
             pr.println(line);
         }
-        PrintWriter prc = new PrintWriter(s.getOutputStream(), true);
-        prc.println("你的文件已经成功上传！");
+        PrintWriter prc = new PrintWriter(new OutputStreamWriter(
+            s.getOutputStream(), StandardCharsets.UTF_8), true);
+        prc.println("File upload success文件上传成功!");
         System.out.println("Server process is down now");
         prc.close();
         pr.close();

@@ -11,6 +11,7 @@ import com.company.SimpleConsoleLog;
 
 import java.io.*;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 public class ClientSide {
     public static void main(String[] args) throws IOException {
@@ -23,7 +24,7 @@ public class ClientSide {
             out.println(line);
         }
         s.shutdownOutput(); // 关闭输出流
-        BufferedReader sr = new BufferedReader(new InputStreamReader(s.getInputStream()));
+        BufferedReader sr = new BufferedReader(new InputStreamReader(s.getInputStream(), StandardCharsets.UTF_8));
         SimpleConsoleLog.WriteLine(sr.readLine());
         //String rRead = sr.readLine();
         //System.out.println(rRead);
