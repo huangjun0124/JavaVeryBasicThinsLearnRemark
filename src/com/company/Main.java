@@ -7,6 +7,10 @@ public class Main {
 
     public static void main(String[] args) {
         UtlTest();
+        Integer ii = 1111; // Integer 类有个缓存池
+        Integer i2 = 1111;
+        Integer i3 = 111;
+        Integer i4 = 111;
     }
 
     private static void UtlTest()
