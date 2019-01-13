@@ -13,6 +13,6 @@ public class GenericExtendServlet extends GenericServlet {
 
     @Override
     public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
-        servletResponse.getWriter().write("Extends GenericServlet class, 你好，欢迎访问!");
+        servletResponse.getWriter().write("Extends GenericServlet class, 你好，欢迎访问!");// 这个中文会乱码
     }
 }
