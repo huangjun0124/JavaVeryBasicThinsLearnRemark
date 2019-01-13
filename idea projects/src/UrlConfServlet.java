@@ -22,7 +22,7 @@ public class UrlConfServlet extends HttpServlet {
         //只有在尚未向客户端输出响应时才可以调用forward()方法，如果页面缓存不为空，在重定向前将自动清除缓存
         //调用forward()方法后，原先存放在HttpResponse对象中的内容将会自动被清除.
 
-        resp.getWriter().write("\nSiteName : " + siteName + "\n");
+        resp.getWriter().write("<br/>SiteName : " + siteName + "<br/>");
         resp.getWriter().write("ResourcePath : " + this.getServletContext().getRealPath("WEB-INF/web.xml"));
     }
 }

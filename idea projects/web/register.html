@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册用户</title>
+    <script type="text/javascript">
+        function refreshCode(){
+            var img = document.getElementById("code");
+            img.src = "/util/getVerifyCodeUsingJar?" + Date.now();
+            console.log("image reloaded! :"　+　img.src);
+        }
+    </script>
+</head>
+<body>
+<p>请填写用户信息</p>
+<hr/>
+<form action="/register" method="post">
+    用户名：<input type="text" name="username"><br>
+    密--码： <input type="password" name="password"><br>
+    性--别：<input type="radio" name="gender" value="男">男
+    <input type="radio" name="gender" value="女">女<br>
+    爱--好：<input type="checkbox" name="hobby" value="写代码">写代码
+    <input type="checkbox" name="hobby" value="玩游戏">玩游戏
+    <input type="checkbox" name="hobby" value="听歌">听歌<br>
+    备--注：<br><textarea rows="5" cols="20" name="remark"></textarea><br>
+    验证码：<input type="text" name="verifyCode">
+    <img id="code" alt="点击更换" onclick="refreshCode()" src="/util/getVerifyCode">
+    <a href="javascript:refreshCode();">点此换一个验证码</a>
+    <br/><hr/>
+    <input type="submit" value="提交">
+</form>
+
+</body>
+</html>
