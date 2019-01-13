@@ -4,6 +4,10 @@ import javax.servlet.*;
 import java.io.IOException;
 
 public class HelloServlet implements Servlet {
+    public HelloServlet(){
+        SimpleConsoleOut.WriteLine("Hello Servlet 构造中..........");
+    }
+
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
         SimpleConsoleOut.WriteLine("Hello Servlet Inited..........");
