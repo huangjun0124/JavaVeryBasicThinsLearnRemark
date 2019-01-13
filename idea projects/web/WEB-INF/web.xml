@@ -19,7 +19,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>HttpServlet</servlet-name>
-        <url-pattern>/htpsvt</url-pattern>
+        <url-pattern>/getHtp/*</url-pattern> <!--http://localhost/getHtp/555-->
     </servlet-mapping>
     <servlet>
         <servlet-name>GenericServlet</servlet-name>
@@ -28,6 +28,13 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>GenericServlet</servlet-name>
-        <url-pattern>/generic</url-pattern>
+        <url-pattern>*.generic</url-pattern> <!--http://localhost/xxx.generic-->
     </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+    <context-param>
+        <param-name>MySiteName</param-name>
+        <param-value>Junguoguo's first servlet test</param-value>
+    </context-param>
 </web-app>

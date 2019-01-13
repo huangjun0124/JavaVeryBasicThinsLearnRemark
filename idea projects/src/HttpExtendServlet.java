@@ -15,6 +15,6 @@ public class HttpExtendServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setCharacterEncoding("utf-8");
         resp.setContentType("text/html;charset=utf-8");
-        resp.getWriter().write("Extends HttpServlet class, 你好，欢迎访问Ya !");
+        resp.getWriter().write("Extends HttpServlet class, 你好，欢迎访问Ya !\n");
     }
 }
