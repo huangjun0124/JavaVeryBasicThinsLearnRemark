@@ -19,6 +19,10 @@ public class VerifyCodeUsingJar extends HttpServlet {
         resp.setHeader("Expires", "0");
 
         ValidateCode code = new ValidateCode(120, 30, 4, 6);
+
+        // 将验证码写入 Session---不同的浏览器、或者重新启动浏览器对应的sessionid 都不同
+        req.getSession().setAttribute("verifyCode", code.getCode());
+
         code.write(resp.getOutputStream());
         // 写入缓存
         String cookie = req.getHeader("cookie");

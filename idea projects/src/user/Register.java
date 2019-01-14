@@ -34,6 +34,15 @@ public class Register extends HttpServlet {
 
         String verifyCode = request.getParameter("verifyCode").toLowerCase();
         String cacheCode = (String)this.getServletContext().getAttribute(request.getRemoteAddr() + request.getHeader("cookie"));
+        // get verifyCode in Session
+        String sessionCacheCode = (String)request.getSession().getAttribute("verifyCode");
+        if(!sessionCacheCode.toLowerCase().equals(verifyCode))
+        {
+            response.setHeader("Refresh", 2 + ";");//自动刷新
+            response.getWriter().write("SessionValidateWrong: 请输入正确的验证码！");
+            return;
+        }
+
         if(!verifyCode.equals(cacheCode.toLowerCase()))
         {
             response.setHeader("Refresh", 2 + ";");//自动刷新
