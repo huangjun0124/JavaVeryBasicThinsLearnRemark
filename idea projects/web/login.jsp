@@ -46,7 +46,7 @@
     <table border="1">
         <tr>
             <td>用户名：</td>
-            <td><input id="username" type="text" name="username"></td>
+            <td><input id="username" type="text" name="userId"></td>
         </tr>
         <tr>
             <td>密码：</td>

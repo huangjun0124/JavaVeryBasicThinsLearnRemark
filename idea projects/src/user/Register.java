@@ -50,6 +50,17 @@ public class Register extends HttpServlet {
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
+        // 检查用户名是否已被占用
+        if(UserContext.getUserById(user2.getUserId()) != null){
+            response.setHeader("Refresh", 2 + ";");//自动刷新
+            response.getWriter().write("UserIdWrong: 用户名在系统中已存在！");
+            return;
+        }
+        if(UserContext.addUser(user2) == 0){
+            response.setHeader("Refresh", 2 + ";");//自动刷新
+            response.getWriter().write("注册失败！");
+            return;
+        }
         // 3 秒后自动跳转主页
         redirectToHomePage(3, response);
     }

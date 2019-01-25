@@ -1,12 +1,14 @@
 package user.model;
 
+import java.util.Date;
+
 public class User {
     private int id;
     private String userId;
     private String userName;
     private String password;
     private String email;
-    private String creationDate;
+    private Date creationDate;
 
     public int getId() {
         return id;
@@ -48,11 +50,11 @@ public class User {
         this.email = email;
     }
 
-    public String getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 }
