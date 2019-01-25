@@ -33,7 +33,6 @@ public class Register extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String verifyCode = request.getParameter("verifyCode").toLowerCase();
-        String cacheCode = (String)this.getServletContext().getAttribute(request.getRemoteAddr() + request.getHeader("cookie"));
         // get verifyCode in Session
         String sessionCacheCode = (String)request.getSession().getAttribute("verifyCode");
         if(!sessionCacheCode.toLowerCase().equals(verifyCode))
@@ -43,12 +42,6 @@ public class Register extends HttpServlet {
             return;
         }
 
-        if(!verifyCode.equals(cacheCode.toLowerCase()))
-        {
-            response.setHeader("Refresh", 2 + ";");//自动刷新
-            response.getWriter().write("请输入正确的验证码！");
-            return;
-        }
         logRequestInfo(request);
         User user = generateUser(request);
         User user2 = new User();

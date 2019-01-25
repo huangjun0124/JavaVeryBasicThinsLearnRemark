@@ -37,4 +37,7 @@
         <param-name>MySiteName</param-name>
         <param-value>Junguoguo's first servlet test</param-value>
     </context-param>
+    <listener>
+        <listener-class>StartupListener</listener-class>
+    </listener>
 </web-app>
