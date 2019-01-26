@@ -18,6 +18,7 @@ public class UserContext {
         try
         {
             Connection con = GetConnection.getConnection();
+            con.setAutoCommit(false);
             //调用数据库连接对象con的方法prepareStatement获取SQL语句的预编译对象
             PreparedStatement pst = con.prepareStatement(sql);
             //调用pst的方法setXXX设置?占位
@@ -46,9 +47,11 @@ public class UserContext {
     public static int addUser(User user){
         String sql = "insert into t_user(userid, username, password,email,creationdate)values(?,?,?,?,?)";
         int ret = 0;
+        Connection con = null;
         try
         {
-            Connection con = GetConnection.getConnection();
+            con = GetConnection.getConnection();
+            con.setAutoCommit(false); // 相当于 begin tran
             //调用数据库连接对象con的方法prepareStatement获取SQL语句的预编译对象
             PreparedStatement pst = con.prepareStatement(sql);
             //调用pst的方法setXXX设置?占位
@@ -59,10 +62,18 @@ public class UserContext {
             pst.setTimestamp(5, new java.sql.Timestamp(System.currentTimeMillis()));
             //调用pst方法执行SQL语句
             ret = pst.executeUpdate();
+            con.commit();
             pst.close();
             con.close();
         }catch (SQLException e) {
             e.printStackTrace();
+            if(con != null){
+                try {
+                    con.rollback();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
