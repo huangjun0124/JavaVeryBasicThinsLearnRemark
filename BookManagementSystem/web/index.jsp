@@ -9,8 +9,13 @@
 <html>
   <head>
     <title>书城管理系统简易实例</title>
+    <script type="text/javascript">
+      function gotoManagerPage(){
+        window.location.href = "/admin/login/home.jsp"
+      }
+    </script>
   </head>
-  <body>
+  <body onload="gotoManagerPage()">
   <a href="admin/login/home.jsp">点击此处登陆，进入管理界面</a>
   </body>
 </html>

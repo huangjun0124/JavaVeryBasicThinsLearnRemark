@@ -23,6 +23,38 @@
 			//不删除
 		}
 	}
+	function checkAllStateChanged() {
+		var checkAllTag = document.getElementById("checkAllTag");
+		console.log(checkAllTag.checked);
+		// 遍历表格中的复选框
+		var ckbooks = document.getElementsByName("ckbook");
+		for (var i = 0; i < ckbooks.length; i++) {
+			ckbooks[i].checked = checkAllTag.checked;
+		}
+	}
+
+	//批量删除
+	function batchDelete(){
+		//BatchDeleteBookSevlet?ids=1001,1002,1003
+		//BatchDeleteBookSevlet?ids=1001-1002-1003【如果UUID有杠，就不能用这种方式】
+		//1.拼接ids
+		//遍历全选下面的复选框
+		var ckBookIds = document.getElementsByName('ckbook');
+		var ids = '';
+		for(var i=0;i<ckBookIds.length;i++){
+			if(ckBookIds[i].checked == true){
+				ids += ckBookIds[i].value + ',';
+			}
+
+		}
+		//2.去除最后一个逗号
+		ids = ids.substring(0,ids.length - 1);
+		console.log(ids);
+
+		//3.访问servlet
+		location.href = '${pageContext.request.contextPath}/DeleteAllServlet?ids=' + ids;
+	}
+
 </script>
 </HEAD>
 <body>
@@ -45,7 +77,7 @@
 								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
 									商品编号</td>
 								<td class="ta_01" bgColor="#ffffff"><input type="text"
-									name="id" size="15" value="" id="Form1_userName" class="bg" />
+									name="id" size="15" value="" id="Form1_uid" class="bg" />
 								</td>
 								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
 									类别：</td>
@@ -73,7 +105,7 @@
 								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
 									商品名称：</td>
 								<td class="ta_01" bgColor="#ffffff"><input type="text"
-									name="name" size="15" value="" id="Form1_userName" class="bg" />
+									name="name" size="15" value="" id="Form2" class="bg" />
 								</td>
 								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
 									价格区间(元)：</td>
@@ -108,6 +140,9 @@
 				</tr>
 				<tr>
 					<td class="ta_01" align="right">
+						<button type="button" id="delete" name="del" value="批量删除"
+								class="button_add" onclick="batchDelete()">批量删除
+						</button>
 						<button type="button" id="add" name="add" value="添加"
 							class="button_add" onclick="addBook()">添加书籍
 						</button>
@@ -118,21 +153,25 @@
 						<table cellspacing="0" cellpadding="1" rules="all"
 							bordercolor="gray" border="1" id="DataGrid1"
 							style="BORDER-RIGHT: gray 1px solid; BORDER-TOP: gray 1px solid; BORDER-LEFT: gray 1px solid; WIDTH: 100%; WORD-BREAK: break-all; BORDER-BOTTOM: gray 1px solid; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #f5fafe; WORD-WRAP: break-word">
-							<tr
-								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
+							<tr style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
+								<td align="center" width="8%">
+									<input id="checkAllTag" type="checkbox" onclick="checkAllStateChanged()"/>全选/全不选
+								</td>
 								<td align="center" width="24%">商品编号</td>
 								<td align="center" width="18%">商品名称</td>
 								<td align="center" width="9%">商品价格</td>
 								<td align="center" width="9%">商品数量</td>
 								<td width="8%" align="center">商品类别</td>
 								<td width="8%" align="center">编辑</td>
-
 								<td width="8%" align="center">删除</td>
 							</tr>
 
 								<c:forEach items="${bookList}" var="book">
 									<tr onmouseover="this.style.backgroundColor = 'white'"
 										onmouseout="this.style.backgroundColor = '#F5FAFE';">
+										<td style="CURSOR: hand; HEIGHT: 22px" align="center" width="8%">
+											<input type="checkbox" name="ckbook" value="${book.id}"/>
+										</td>
 										<td style="CURSOR: hand; HEIGHT: 22px" align="center"
 											width="23">${book.id}</td>
 										<td style="CURSOR: hand; HEIGHT: 22px" align="center"

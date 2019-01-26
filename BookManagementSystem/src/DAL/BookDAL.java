@@ -68,7 +68,7 @@ public class BookDAL {
         }
     }
 
-    public void deleteAllBook(String[] ids) throws SQLException{
+    public void deleteAllBook(String[] ids){
         // TODO Auto-generated method stub
         //第一种方式
         QueryRunner qr = new QueryRunner(C3P0Utils.getDataSource());
@@ -82,12 +82,16 @@ public class BookDAL {
 			deleteBookById(bookId);
 		}*/
 
-        //第三种
+        //第三种-二维数组，用来匹配多个参数的情况
         Object[][] params = new Object[ids.length][];
         for(int i=0;i < ids.length;i++){
-            params[i] = new Object[]{ids[i]};
+            params[i] = new Object[]{ ids[i] };
         }
-        qr.batch(sql, params);
+        try {
+            qr.batch(sql, params);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Book> findBookByCondition(
