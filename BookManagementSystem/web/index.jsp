@@ -11,6 +11,6 @@
     <title>书城管理系统简易实例</title>
   </head>
   <body>
-  SimpleTestNot implemented yet
+  <a href="admin/login/home.jsp">点击此处登陆，进入管理界面</a>
   </body>
 </html>

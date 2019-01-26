@@ -28,7 +28,7 @@
 		
 		
 		//商品管理的子目录添加
-		d.add(11,1,'商品查看','${pageContext.request.contextPath}/admin/products/list.jsp','','mainFrame');
+		d.add(11,1,'商品查看','${pageContext.request.contextPath}/BookListServlet','','mainFrame');
 		
 		
 		document.write(d);

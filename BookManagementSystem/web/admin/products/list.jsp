@@ -119,33 +119,35 @@
 								<td width="8%" align="center">删除</td>
 							</tr>
 
-							
-								<tr onmouseover="this.style.backgroundColor = 'white'"
-									onmouseout="this.style.backgroundColor = '#F5FAFE';">
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="23">1</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="18%">java编程思想</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="8%">1200</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="8%">100</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center">计算机</td>
-									<td align="center" style="HEIGHT: 22px" width="7%"><a
-										href="${pageContext.request.contextPath}/admin/products/edit.jsp">
+								<c:forEach items="${bookList}" var="book">
+									<tr onmouseover="this.style.backgroundColor = 'white'"
+										onmouseout="this.style.backgroundColor = '#F5FAFE';">
+										<td style="CURSOR: hand; HEIGHT: 22px" align="center"
+											width="23">${book.id}</td>
+										<td style="CURSOR: hand; HEIGHT: 22px" align="center"
+											width="18%">${book.name}</td>
+										<td style="CURSOR: hand; HEIGHT: 22px" align="center"
+											width="8%">${book.price}</td>
+										<td style="CURSOR: hand; HEIGHT: 22px" align="center"
+											width="8%">${book.pnum}</td>
+										<td style="CURSOR: hand; HEIGHT: 22px" align="center">${book.category}</td>
+										<td align="center" style="HEIGHT: 22px" width="7%"><a
+												href="${pageContext.request.contextPath}/admin/products/edit.jsp">
 											<img
-											src="${pageContext.request.contextPath}/admin/images/i_edit.gif"
-											border="0" style="CURSOR: hand"> </a>
-									</td>
+													src="${pageContext.request.contextPath}/admin/images/i_edit.gif"
+													border="0" style="CURSOR: hand"> </a>
+										</td>
 
-									<td align="center" style="HEIGHT: 22px" width="7%"><a
-										href="#">
+										<td align="center" style="HEIGHT: 22px" width="7%"><a
+												href="#">
 											<img
-											src="${pageContext.request.contextPath}/admin/images/i_del.gif"
-											width="16" height="16" border="0" style="CURSOR: hand">
-									</a>
-									</td>
-								</tr>
+													src="${pageContext.request.contextPath}/admin/images/i_del.gif"
+													width="16" height="16" border="0" style="CURSOR: hand">
+										</a>
+										</td>
+									</tr>
+								</c:forEach>
+
 						
 						</table>
 					</td>
