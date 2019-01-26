@@ -131,11 +131,9 @@
 										<td style="CURSOR: hand; HEIGHT: 22px" align="center"
 											width="8%">${book.pnum}</td>
 										<td style="CURSOR: hand; HEIGHT: 22px" align="center">${book.category}</td>
-										<td align="center" style="HEIGHT: 22px" width="7%"><a
-												href="${pageContext.request.contextPath}/admin/products/edit.jsp">
-											<img
-													src="${pageContext.request.contextPath}/admin/images/i_edit.gif"
-													border="0" style="CURSOR: hand"> </a>
+										<td align="center" style="HEIGHT: 22px" width="7%">
+											<a href="${pageContext.request.contextPath}/FindBookByIdServlet?id=${book.id}">
+											<img src="${pageContext.request.contextPath}/admin/images/i_edit.gif" border="0" style="CURSOR: hand"> </a>
 										</td>
 
 										<td align="center" style="HEIGHT: 22px" width="7%"><a

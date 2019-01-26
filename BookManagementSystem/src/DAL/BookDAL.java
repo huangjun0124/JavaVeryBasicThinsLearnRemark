@@ -36,16 +36,25 @@ public class BookDAL {
         }
     }
 
-    public Book findBookById(String id) throws SQLException{
+    public Book findBookById(String id){
         QueryRunner qr = new QueryRunner(C3P0Utils.getDataSource());
-        return qr.query("select * from books where id = ?", new BeanHandler<Book>(Book.class),id);
+        try {
+            return qr.query("select * from books where id = ?", new BeanHandler<Book>(Book.class),id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public void uppdateBook(Book book)throws SQLException{
+    public void uppdateBook(Book book){
         QueryRunner qr = new QueryRunner(C3P0Utils.getDataSource());
         String sql = "update books set name = ?,price = ?,pnum = ?,category = ?,description = ? where id = ?";
-        qr.update(sql,book.getName(),book.getPrice(),
-                book.getPnum(),book.getCategory(),book.getDescription(),book.getId());
+        try {
+            qr.update(sql,book.getName(),book.getPrice(),
+                    book.getPnum(),book.getCategory(),book.getDescription(),book.getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void deleteBookById(String bookId) throws SQLException{
