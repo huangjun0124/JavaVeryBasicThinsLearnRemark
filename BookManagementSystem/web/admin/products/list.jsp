@@ -60,7 +60,7 @@
 <body>
 	<br>
 	<form id="Form1" name="Form1"
-		action="${pageContext.request.contextPath}/findProductByManyCondition"
+		action="${pageContext.request.contextPath}/SearchBookServlet"
 		method="post">
 		<table cellSpacing="1" cellPadding="0" width="100%" align="center"
 			bgColor="#f5fafe" border="0">
@@ -76,13 +76,12 @@
 							<tr>
 								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
 									商品编号</td>
-								<td class="ta_01" bgColor="#ffffff"><input type="text"
-									name="id" size="15" value="" id="Form1_uid" class="bg" />
+								<td class="ta_01" bgColor="#ffffff">
+									<input type="text" name="id" size="15" value="" id="Form1_uid" class="bg" />
 								</td>
-								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
-									类别：</td>
-								<td class="ta_01" bgColor="#ffffff"><select name="category"
-									id="category">
+								<td height="22" align="center" bgColor="#f5fafe" class="ta_01"> 类别：</td>
+								<td class="ta_01" bgColor="#ffffff">
+									<select name="category" id="category">
 										<option value="" selected="selected">--选择商品类加--</option>
 										<option value="文学">文学</option>
 										<option value="生活">生活</option>
@@ -104,14 +103,15 @@
 							<tr>
 								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
 									商品名称：</td>
-								<td class="ta_01" bgColor="#ffffff"><input type="text"
-									name="name" size="15" value="" id="Form2" class="bg" />
+								<td class="ta_01" bgColor="#ffffff">
+									<input type="text" name="name" size="15" value="" id="Form2" class="bg" />
 								</td>
 								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
 									价格区间(元)：</td>
-								<td class="ta_01" bgColor="#ffffff"><input type="text"
-									name="minprice" size="10" value="" />- <input type="text"
-									name="maxprice" size="10" value="" /></td>
+								<td class="ta_01" bgColor="#ffffff">
+									<input type="text" name="minprice" size="10" value="" />-
+									<input type="text" name="maxprice" size="10" value="" />
+								</td>
 							</tr>
 
 							<tr>
@@ -123,11 +123,9 @@
 								<td align="right" bgColor="#ffffff" class="ta_01"><br>
 									<br></td>
 								<td align="right" bgColor="#ffffff" class="ta_01">
-									<button type="submit" id="search" name="search"
-										value="&#26597;&#35810;" class="button_view">
-										&#26597;&#35810;</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
-									type="reset" name="reset" value="&#37325;&#32622;"
-									class="button_view" />
+									<button type="submit" id="search" name="search" value="查询" class="button_view">
+										查询</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="reset" name="reset" value="重置" class="button_view" />
 								</td>
 							</tr>
 						</table>
