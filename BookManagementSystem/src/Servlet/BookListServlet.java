@@ -17,9 +17,6 @@ public class BookListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         BookDAL bookService = new BookDAL();
         List<Book> books = bookService.findAllBooks();
-        if(books != null){
-            request.setAttribute("bookList", books);
-            request.getRequestDispatcher("/admin/products/list.jsp").forward(request, response);
-        }
+        ServletCommon.forwardToProductListPage(books, request, response);
     }
 }

@@ -24,12 +24,16 @@ public class BookDAL {
         }
     }
 
-    public void addBook(Book book)throws SQLException{
+    public void addBook(Book book){
         QueryRunner qr = new QueryRunner(C3P0Utils.getDataSource());
-        //注意：这是的book由Servlet传入时，是没有ID,手动设置一个UUID
-        qr.update("insert into books values(?,?,?,?,?,?)",
-                UUID.randomUUID().toString(),book.getName(),book.getPrice(),
-                book.getPnum(),book.getCategory(),book.getDescription());
+        //注意：这时的book由Servlet传入时，是没有ID,手动设置一个UUID
+        try {
+            qr.update("insert into books values(?,?,?,?,?,?)",
+                    UUID.randomUUID().toString(),book.getName(),book.getPrice(),
+                    book.getPnum(),book.getCategory(),book.getDescription());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public Book findBookById(String id) throws SQLException{

@@ -9,7 +9,7 @@
 <script language="javascript"
 	src="${pageContext.request.contextPath}/admin/js/public.js"></script>
 <script type="text/javascript">
-	function addProduct() {
+	function addBook() {
 		window.location.href = "${pageContext.request.contextPath}/admin/products/add.jsp";
 	}
 </script>
@@ -97,8 +97,8 @@
 				</tr>
 				<tr>
 					<td class="ta_01" align="right">
-						<button type="button" id="add" name="add" value="&#28155;&#21152;"
-							class="button_add" onclick="addProduct()">&#28155;&#21152;
+						<button type="button" id="add" name="add" value="添加"
+							class="button_add" onclick="addBook()">添加书籍
 						</button>
 					</td>
 				</tr>
