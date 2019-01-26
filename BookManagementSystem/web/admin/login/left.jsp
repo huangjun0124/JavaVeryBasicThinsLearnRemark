@@ -29,8 +29,10 @@
 		
 		//商品管理的子目录添加
 		d.add(11,1,'商品查看','${pageContext.request.contextPath}/BookListServlet','','mainFrame');
-		
-		
+
+        //分页查看功能
+        d.add(12,1,'分页查看','${pageContext.request.contextPath}/PagedBookListServlet','','mainFrame');
+
 		document.write(d);
 		//-->
 	</script>

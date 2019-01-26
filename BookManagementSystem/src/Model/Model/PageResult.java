@@ -8,7 +8,7 @@ public class PageResult<T> {
     private long totalCount;//总记录数
     private int totalPage;//总页数
     private int currentPage;//当前页
-    private int pageCount = 5;//每页显示的条数
+    private int countPerPage = 3;//每页显示的条数
     public List<T> getList() {
         return list;
     }
@@ -27,11 +27,11 @@ public class PageResult<T> {
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
     }
-    public int getPageCount() {
-        return pageCount;
+    public int getCountPerPage() {
+        return countPerPage;
     }
-    public void setPageCount(int pageCount) {
-        this.pageCount = pageCount;
+    public void setCountPerPage(int pageCount) {
+        this.countPerPage = pageCount;
     }
 
     public long getTotalCount() {
@@ -43,7 +43,7 @@ public class PageResult<T> {
     @Override
     public String toString() {
         return "PageResult [list=" + list + ", totalCount=" + totalCount + ", totalPage=" + totalPage + ", currentPage="
-                + currentPage + ", pageCount=" + pageCount + "]";
+                + currentPage + ", CountPerPage=" + countPerPage + "]";
     }
 
 

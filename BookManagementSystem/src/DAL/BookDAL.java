@@ -127,26 +127,28 @@ public class BookDAL {
         return null;
     }
 
-    public PageResult<Book> findBooksWithPageCount(int page) throws SQLException {
+    public PageResult<Book> getBookListWithPageCount(int page) {
         QueryRunner qr = new QueryRunner(C3P0Utils.getDataSource());
         PageResult<Book> pr = new PageResult<>();
         //设置当前面
         pr.setCurrentPage(page);
+        try{
+            //总条数
+            Long totalCount = (Long) qr.query("select count(*) from books where 1=1", new ScalarHandler());
+            pr.setTotalCount(totalCount);
 
-        //总条数
-        Long totalCount = (Long) qr.query("select count(*) from books where 1=1", new ScalarHandler());
-        pr.setTotalCount(totalCount);
+            //总页数
+            int totalPage = (int) (totalCount % pr.getCountPerPage() == 0 ? totalCount / pr.getCountPerPage() : totalCount / pr.getCountPerPage() + 1);
+            pr.setTotalPage(totalPage);
 
-        //总页数
-        int totalPage = (int) (totalCount % pr.getPageCount() == 0 ? totalCount / pr.getPageCount() : totalCount / pr.getPageCount() + 1);
-        pr.setTotalPage(totalPage);
-
-        //设置查询到的数据
-        String sql = "select * from books where 1=1 order by name limit ?,?";//这里可以给个默认排序
-        int start = pr.getPageCount() * (page - 1);
-        List<Book> list = qr.query(sql, new BeanListHandler<Book>(Book.class), start, pr.getPageCount());
-        pr.setList(list);
-
+            //设置查询到的数据
+            String sql = "select * from books where 1=1 order by name limit ?,?";//这里可以给个默认排序
+            int start = pr.getCountPerPage() * (page - 1);
+            List<Book> list = qr.query(sql, new BeanListHandler<Book>(Book.class), start, pr.getCountPerPage());
+            pr.setList(list);
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
         return pr;
     }
 }
