@@ -57,11 +57,15 @@ public class BookDAL {
         }
     }
 
-    public void deleteBookById(String bookId) throws SQLException{
+    public void deleteBookById(String bookId){
         // TODO Auto-generated method stub
         QueryRunner qr = new QueryRunner(C3P0Utils.getDataSource());
         String sql = "delete from books where id = ?";
-        qr.update(sql,bookId);
+        try {
+            qr.update(sql,bookId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void deleteAllBook(String[] ids) throws SQLException{

@@ -12,6 +12,17 @@
 	function addBook() {
 		window.location.href = "${pageContext.request.contextPath}/admin/products/add.jsp";
 	}
+
+	//删除书js代码
+	function deleteBook(bookName,bookId) {
+		//确认提示框
+		if(confirm('是否要删除【' + bookName + '】 这本书?')){
+			//确定，要删除
+			location.href = '${pageContext.request.contextPath}/DeleteBookByIdServlet?id=' + bookId;
+		}else{
+			//不删除
+		}
+	}
 </script>
 </HEAD>
 <body>
@@ -136,12 +147,10 @@
 											<img src="${pageContext.request.contextPath}/admin/images/i_edit.gif" border="0" style="CURSOR: hand"> </a>
 										</td>
 
-										<td align="center" style="HEIGHT: 22px" width="7%"><a
-												href="#">
-											<img
-													src="${pageContext.request.contextPath}/admin/images/i_del.gif"
-													width="16" height="16" border="0" style="CURSOR: hand">
-										</a>
+										<td align="center" style="HEIGHT: 22px" width="7%">
+											<a href="javascript:deleteBook('${book.name}', '${book.id}')">
+												<img src="${pageContext.request.contextPath}/admin/images/i_del.gif" width="16" height="16" border="0" style="CURSOR: hand">
+											</a>
 										</td>
 									</tr>
 								</c:forEach>
