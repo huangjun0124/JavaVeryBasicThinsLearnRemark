@@ -23,6 +23,11 @@
         <typeAlias alias="roleentity" type="Entity.Role" />      <!--在 MyBatis 中别名 不区分大小写-->
         <typeAlias alias="userentity" type="Entity.User" />
     </typeAliases>
+    <plugins>
+        <plugin interceptor="Utils.MyStatementHandlerPlugin">
+            <property name="dbType" value="mysql"/>
+        </plugin>
+    </plugins>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -39,5 +44,5 @@
         <!-- <mapper resource="mapper/RoleMapper.xml"/>
          <mapper class="Mapper.UserMapper"/>    -->
          <package name="Mapper"/>
-     </mappers>
+    </mappers>
  </configuration>
