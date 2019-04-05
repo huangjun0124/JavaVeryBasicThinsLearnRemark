@@ -5,6 +5,7 @@
     <settings>
         <setting name="cacheEnabled" value="true"/>
         <setting name="lazyLoadingEnabled" value="true" />
+        <setting name="aggressiveLazyLoading" value="false"/>
         <setting name="multipleResultSetsEnabled" value="true" />
         <setting name="useColumnLabel" value="true" />
         <setting name="useGeneratedKeys" value="false" />
@@ -35,7 +36,8 @@
     </environments>
     <!--加载映射文件-->
     <mappers>
-        <mapper resource="mapper/RoleMapper.xml"/>
-        <mapper class="Mapper.UserMapper"/>
-    </mappers>
-</configuration>
+        <!-- <mapper resource="mapper/RoleMapper.xml"/>
+         <mapper class="Mapper.UserMapper"/>    -->
+         <package name="Mapper"/>
+     </mappers>
+ </configuration>

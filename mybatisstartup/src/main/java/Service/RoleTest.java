@@ -9,6 +9,7 @@ import Utils.UUIDUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 
+import java.util.Map;
 import java.util.UUID;
 
 public class RoleTest {
@@ -20,7 +21,7 @@ public class RoleTest {
             RoleMapper roleMapper = sqlSession.getMapper(RoleMapper.class);
             Role role = new Role();
             role.setId(UUIDUtil.newUUIDStrWithoutDash());
-            role.setRoleName("normal");
+            role.setRoleName("testmap");
             role.setNote(DateUtil.getTimeStamp());
             //通过sqlSession操作数据库
             //sqlSession.insert("Mapper.RoleMapper.insertRole", role);
@@ -29,6 +30,9 @@ public class RoleTest {
             // 下面这个必须加上，否则不会提交更改到数据库
             sqlSession.commit();
             log.info(role);
+
+            Map maps = roleMapper.findReturnMap("adm");   // 入参改为 test 就不行，应该只支持返回一条记录的情况
+            log.warn(maps.toString());
         }  finally {
             if(sqlSession != null){
                 sqlSession.close();

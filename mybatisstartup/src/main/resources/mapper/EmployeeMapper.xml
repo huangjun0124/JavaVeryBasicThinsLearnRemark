@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Mapper.EmployeeMapper">
+    <resultMap id="femaleHealthFormMapper" type="Entity.FemaleEmployee" extends="EmployeeMap" >
+        <association property="femaleHealthForm" column="id" select="Mapper.FemaleHealthFormMapper.getFemaleHealthForm"/>
+    </resultMap>
+    <resultMap id="maleHealthFormMapper" type="Entity.MaleEmployee" extends="EmployeeMap" >
+        <association property="maleHealthForm" column="id" select="Mapper.MaleHealthFormMapper.getMaleHealthForm"/>
+    </resultMap>
+    <resultMap id="EmployeeMap" type="Entity.Employee" >
+        <id column="id" property="id"/>
+        <result column="sex" property="sex" typeHandler="Entity.TypeHandler.SexEnumHandler"/>
+        <result column="birthday" property="birthday"/>
+        <result column="real_name" property="realName"/>
+        <result column="mobile" property="mobile"/>
+        <result column="email" property="email"/>
+        <result column="position" property="position"/>
+        <result column="note" property="note"/>
+        <association property="workCard" column="id" select="Mapper.WorkCardMapper.getWorkCard"/>
+        <collection property="employeeTaskList" column="id" select="Mapper.EmployeeTaskMapper.getEmployeeTask" fetchType="lazy"/>
+        <discriminator javaType="long" column="sex">
+            <case value="99" resultMap="maleHealthFormMapper"  />
+            <case value="66" resultMap="femaleHealthFormMapper"/>
+        </discriminator>
+    </resultMap>
+    <select id="getEmployee" parameterType="long" resultMap="EmployeeMap">
+         select id, real_name, sex, birthday, mobile,email,POSITION,note from t_employee where id=#{id}
+    </select>
+</mapper>
