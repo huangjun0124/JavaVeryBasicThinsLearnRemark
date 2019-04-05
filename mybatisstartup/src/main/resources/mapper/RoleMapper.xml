@@ -19,5 +19,13 @@
     <select id="findReturnMap" resultType="map">
         select id, RoleName as roleName, Note as note from role where RoleName like concat('%', #{roleName}, '%')
     </select>
+    <select id="findRolesPaged" parameterType="string" resultType="roleentity" flushCache="true" useCache="false">
+        select id, RoleName as roleName, Note as note from role
+        <where>
+            <if test="roleName != null">
+                roleName like concat('%', #{roleName},'%')
+            </if>
+        </where>
+    </select>
 
 </mapper>

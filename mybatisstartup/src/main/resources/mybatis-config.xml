@@ -27,7 +27,19 @@
         <plugin interceptor="Utils.MyStatementHandlerPlugin">
             <property name="dbType" value="mysql"/>
         </plugin>
-    </plugins>
+        <plugin interceptor="Utils.MySqlPageQueryPlugin">
+            <!--默认页码-->
+            <property name="default.pageNo" value="1"/>
+            <!--默认每页条数-->
+            <property name="default.pageSize" value="100"/>
+            <!--是否启动分页插件功能-->
+            <property name="default.useFlag" value="true"/>
+            <!--是否检查页码有效性，如果非有效，则抛出异常-->
+            <property name="default.checkPageNoLessThanSize" value="false"/>
+            <!--默认是否清除最后一个 order by 后的语句-->
+            <property name="default.isCleanOrderBy" value="true"/>
+        </plugin>
+</plugins>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>

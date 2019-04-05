@@ -40,7 +40,7 @@ public class MyStatementHandlerPlugin implements Interceptor {
         }
         statementHandler = (StatementHandler) obj ;
         String sql = (String) metaStatementHandler.getValue ("delegate.boundSql.sql");
-        Long parameterObj = (Long) metaStatementHandler.getValue("delegate.boundSql.parameterObject");
+        Object parameterObj = metaStatementHandler.getValue("delegate.boundSql.parameterObject");
         logger.info("执行的SQL：【" + sql + "】");
         logger.info("参数：【" + parameterObj + "】");
         logger.info("before ...................................................");

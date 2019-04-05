@@ -1,4 +1,5 @@
 import Definitions.AccountTypeEnum;
+import Definitions.PageParams;
 import Definitions.SexEnum;
 import Entity.Role;
 import Entity.User;
@@ -124,6 +125,28 @@ public class MybatisTest {
         List<User> users = mapper.findUserByRowBounds("ke", rb);
         for(User u : users){
             logger.info(u);
+        }
+        sqlSession.close();
+    }
+
+    @Test
+    public void roleMapPageSelect(){
+        SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
+        RoleMapper mapper = sqlSession.getMapper(RoleMapper.class);
+        PageParams pageParams = new PageParams();
+        pageParams.setPageSize(3);
+        List<Role> roles = mapper.findRolesPaged(pageParams,"test");
+        logger.warn("Page【1】 select result...............");
+        for (Role r : roles){
+            logger.info(r);
+        }
+        pageParams.setPageNo(2);
+		// select mapper 需要同时设置【flushCache="true" useCache="false"】才能不缓存
+		// 否则下面这个不会再调用数据库查询，而是直接返回上一次缓存的结果
+        roles = mapper.findRolesPaged(pageParams,"test");
+        logger.warn("Page【2】 select result...............");
+        for (Role r : roles){
+            logger.info(r);
         }
         sqlSession.close();
     }
