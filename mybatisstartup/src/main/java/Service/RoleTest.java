@@ -20,7 +20,7 @@ public class RoleTest {
             RoleMapper roleMapper = sqlSession.getMapper(RoleMapper.class);
             Role role = new Role();
             role.setId(UUIDUtil.newUUIDStrWithoutDash());
-            role.setRoleName("第一个测试");
+            role.setRoleName("normal");
             role.setNote(DateUtil.getTimeStamp());
             //通过sqlSession操作数据库
             //sqlSession.insert("Mapper.RoleMapper.insertRole", role);
