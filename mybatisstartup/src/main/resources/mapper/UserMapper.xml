@@ -7,21 +7,23 @@
         <result property="sex" column="sex" typeHandler="Entity.TypeHandler.SexEnumHandler"/>
         <result property="accountType" column="AccountType"  typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
     </resultMap>
-    
+    <sql id="cols">
+        id, UserName, Sex, AccountType
+    </sql>
     <insert id="insertUser" parameterType="userentity">
-       insert into user(id, UserName, Sex, AccountType) values (#{id}, #{userName},
+       insert into user(<include refid="cols"/>) values (#{id}, #{userName},
        #{sex, typeHandler=Entity.TypeHandler.SexEnumHandler},
        #{accountType, typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler})
     </insert>
 
     <select id="getUser" parameterType="string" resultMap="userMapper" >
-        select id, UserName, sex, AccountType from user where id = #{id}
+        select <include refid="cols"/> from user where id = #{id}
     </select>
     <select id="findUserByAnnotation" resultMap="userMapper">
-         select id, UserName, sex, AccountType from user where UserName like concat('%', #{userName}, '%')   or  sex=#{sex, typeHandler=Entity.TypeHandler.SexEnumHandler}
+         select <include refid="cols"/> from user where UserName like concat('%', #{userName}, '%')   or  sex=#{sex, typeHandler=Entity.TypeHandler.SexEnumHandler}
     </select>
     <select id="findUserByRowBounds" resultMap="userMapper">
-         select id, UserName, sex, AccountType from user where UserName like concat('%', #{userName}, '%') 
+         select <include refid="cols"/> from user where UserName like concat('%', #{userName}, '%')
     </select>
 
 </mapper>

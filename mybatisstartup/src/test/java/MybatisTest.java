@@ -86,16 +86,16 @@ public class MybatisTest {
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         User user = new User();
         user.setId(UUIDUtil.newUUIDStrWithoutDash());
-        user.setUserName("keith");
+        user.setUserName("keloris");
         user.setSex(SexEnum.MALE);
-        user.setAccountType(AccountTypeEnum.Admin);
+        user.setAccountType(AccountTypeEnum.InternalUser);
         mapper.insertUser(user);
 
         user = new User();
         user.setId(UUIDUtil.newUUIDStrWithoutDash());
-        user.setUserName("jun");
+        user.setUserName("Chris");
         user.setSex(SexEnum.FEMALE);
-        user.setAccountType(AccountTypeEnum.FreeUser);
+        user.setAccountType(AccountTypeEnum.Admin);
         mapper.insertUser(user);
         sqlSession.commit();
         
@@ -107,8 +107,8 @@ public class MybatisTest {
         SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         User user = mapper.getUser("a6d9ec6ce4f9428f8dd7de41f54afa06");
-        logger.warn(user);
-        logger.info("findUserByAnnotation result list:...........................");
+        logger.info(user);
+        logger.warn("findUserByAnnotation result list:...........................");
         List<User> users = mapper.findUserByAnnotation("kei", SexEnum.FEMALE);
         for(User u : users){
             logger.info(u);
