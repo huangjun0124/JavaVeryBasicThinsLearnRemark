@@ -1,7 +1,12 @@
+import Definitions.AccountTypeEnum;
+import Definitions.SexEnum;
 import Entity.Role;
+import Entity.User;
 import Mapper.RoleMapper;
+import Mapper.UserMapper;
 import Utils.DateUtil;
 import Utils.SqlSessionFactoryUtil;
+import Utils.UUIDUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Test;
@@ -72,5 +77,38 @@ public class MybatisTest {
         sqlSession.close();
 
         logger.info("Roles update done.");
+    }
+
+    @Test
+    public void userMapperAdd(){
+        SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        User user = new User();
+        user.setId(UUIDUtil.newUUIDStrWithoutDash());
+        user.setUserName("keith");
+        user.setSex(SexEnum.MALE);
+        user.setAccountType(AccountTypeEnum.Admin);
+        mapper.insertUser(user);
+
+        user = new User();
+        user.setId(UUIDUtil.newUUIDStrWithoutDash());
+        user.setUserName("jun");
+        user.setSex(SexEnum.FEMALE);
+        user.setAccountType(AccountTypeEnum.FreeUser);
+        mapper.insertUser(user);
+        sqlSession.commit();
+        
+        sqlSession.close();
+    }
+
+    @Test
+    public void userMapperSelect(){
+        SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        User user = mapper.getUser("a6d9ec6ce4f9428f8dd7de41f54afa06");
+        logger.info(user);
+        user = mapper.getUser("b70ad327340640b890cd5a67426de48a");
+        logger.info(user);
+        sqlSession.close();
     }
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Mapper.UserMapper">
+    <resultMap id="userMapper" type="userentity">
+        <result property="id" column="id" />
+        <result property="userName" column="UserName" />
+        <result property="sex" column="sex" typeHandler="Entity.TypeHandler.SexEnumHandler"/>
+        <result property="accountType" column="AccountType"  typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
+    </resultMap>
+    
+    <insert id="insertUser" parameterType="userentity">
+       insert into user(id, UserName, Sex, AccountType) values (#{id}, #{userName},
+       #{sex, typeHandler=Entity.TypeHandler.SexEnumHandler},
+       #{accountType, typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler})
+    </insert>
+
+    <select id="getUser" parameterType="string" resultMap="userMapper" >
+        select id, UserName, sex, AccountType from user where id = #{id}
+    </select>
+
+</mapper>

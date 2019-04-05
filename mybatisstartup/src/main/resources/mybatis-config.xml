@@ -2,8 +2,25 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <properties resource="db.properties"/>
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true" />
+        <setting name="multipleResultSetsEnabled" value="true" />
+        <setting name="useColumnLabel" value="true" />
+        <setting name="useGeneratedKeys" value="false" />
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
+        <setting name="autoMappingUnknownColumnBehavior" value="WARNING" />
+        <setting name="defaultExecutorType" value="SIMPLE" />
+        <setting name="defaultStatementTimeout" value="60" />  <!--单位：秒-->
+        <setting name="safeRowBoundsEnabled" value="false" />
+        <setting name="mapUnderscoreToCamelCase" value="false" />
+        <setting name="localCacheScope" value="SESSION" />     <!--会缓存一个会话中执行的所有查询-->
+        <setting name="jdbcTypeForNull" value="OTHER" />
+        <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString" />
+    </settings>
     <typeAliases>
-        <typeAlias alias="roleentity" type="Entity.Role" />
+        <typeAlias alias="roleentity" type="Entity.Role" />      <!--在 MyBatis 中别名 不区分大小写-->
+        <typeAlias alias="userentity" type="Entity.User" />
     </typeAliases>
     <environments default="development">
         <environment id="development">
@@ -19,5 +36,6 @@
     <!--加载映射文件-->
     <mappers>
         <mapper resource="mapper/RoleMapper.xml"/>
+        <mapper resource="mapper/UserMapper.xml"/>
     </mappers>
 </configuration>
