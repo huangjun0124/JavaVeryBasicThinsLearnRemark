@@ -17,5 +17,11 @@
     <select id="getUser" parameterType="string" resultMap="userMapper" >
         select id, UserName, sex, AccountType from user where id = #{id}
     </select>
+    <select id="findUserByAnnotation" resultMap="userMapper">
+         select id, UserName, sex, AccountType from user where UserName like concat('%', #{userName}, '%')   or  sex=#{sex, typeHandler=Entity.TypeHandler.SexEnumHandler}
+    </select>
+    <select id="findUserByRowBounds" resultMap="userMapper">
+         select id, UserName, sex, AccountType from user where UserName like concat('%', #{userName}, '%') 
+    </select>
 
 </mapper>

@@ -7,6 +7,7 @@ import Mapper.UserMapper;
 import Utils.DateUtil;
 import Utils.SqlSessionFactoryUtil;
 import Utils.UUIDUtil;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Test;
@@ -106,9 +107,24 @@ public class MybatisTest {
         SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         User user = mapper.getUser("a6d9ec6ce4f9428f8dd7de41f54afa06");
-        logger.info(user);
-        user = mapper.getUser("b70ad327340640b890cd5a67426de48a");
-        logger.info(user);
+        logger.warn(user);
+        logger.info("findUserByAnnotation result list:...........................");
+        List<User> users = mapper.findUserByAnnotation("kei", SexEnum.FEMALE);
+        for(User u : users){
+            logger.info(u);
+        }
+        sqlSession.close();
+    }
+
+    @Test
+    public void userMapperRowBoundsSelect(){
+        SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        RowBounds rb = new RowBounds(2, 2);
+        List<User> users = mapper.findUserByRowBounds("ke", rb);
+        for(User u : users){
+            logger.info(u);
+        }
         sqlSession.close();
     }
 }
