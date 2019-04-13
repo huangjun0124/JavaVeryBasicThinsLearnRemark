@@ -4,9 +4,11 @@ import Definitions.SexEnum;
 import Entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface UserMapper {
     public int insertUser(User user);
     public User getUser( String id) ;

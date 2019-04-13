@@ -53,4 +53,12 @@
         <property name="mapperInterface"    value="Mapper.RoleMapper"/>
         <property name="sqlSessionFactory" ref="SqlSessionFactory"/>
     </bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--指定让 Spring 自动扫描什么包 ， 它会逐层深入扫描 ，如果遇到多个包可 以使用半角逗号分隔。-->
+        <property name="basePackage" value="Mapper"/>
+        <!--指定在 Spring 中定义 SqlSessionFactory 的 Bean 名称-->
+        <property name="sqlSessionFactoryBeanName" value="SqlSessionFactory"/>
+        <!--指定标注才扫描成为 Mapper-->
+        <property name="annotationClass" value="org.springframework.stereotype.Repository"/>
+    </bean>
 </beans>
