@@ -27,6 +27,8 @@ public class RoleListServiceImpl implements RoleListService {
                 count += service.insertRole(role);
             } catch (Exception e) {
                 log.info(e);
+                // 自行抛出异常，让 Spring 事务管理流程获取异常，进行事务管理
+                throw new RuntimeException(e);
             }
         }
         return count;

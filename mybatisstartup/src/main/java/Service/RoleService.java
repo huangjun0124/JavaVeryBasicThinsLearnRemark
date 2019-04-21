@@ -4,5 +4,5 @@ import Entity.Role;
 
 
 public interface RoleService {
-    public int insertRole(Role role);
+    public int insertRole(Role role) throws Exception;
 }

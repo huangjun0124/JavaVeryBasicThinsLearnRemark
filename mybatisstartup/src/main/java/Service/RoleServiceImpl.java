@@ -12,9 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleMapper mapper = null;
-    @Transactional(propagation = Propagation.REQUIRES_NEW, // 每次产生一个新的事物
+    @Transactional(propagation = Propagation.REQUIRED, // 每次产生一个新的事物
     isolation = Isolation.READ_COMMITTED)
-    public int insertRole(Role role) {
+    public int insertRole(Role role) throws Exception {
+        if(role.getRoleName().endsWith("4")){
+            throw new Exception("ddd");
+        }
         return mapper.insertRole(role);
     }
 }
